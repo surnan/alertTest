@@ -49,14 +49,12 @@ class ViewController: UIViewController {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-        finalButton.setTitle("FINAL BUTTON", for: .normal)
-        finalButton.setTitleColor(.white, for: .normal)
-        finalButton.backgroundColor = UIColor.blue
         view.addSubview(finalButton)
+        finalButton.setTitle("FINAL BUTTON", for: .normal)
+        finalButton.backgroundColor = UIColor.blue
         finalButton.translatesAutoresizingMaskIntoConstraints = false
         finalButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        finalButton.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor, constant: 50).isActive = true
+        finalButton.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor, constant: -50).isActive = true
     }
     
     
@@ -96,7 +94,7 @@ class ViewController: UIViewController {
 
 
 
-
+//        finalButton.setTitleColor(.white, for: .normal)
 
 
 
