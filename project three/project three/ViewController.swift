@@ -14,6 +14,13 @@ class ViewController: UIViewController {
     var myLabel = UILabel()
     
     var tempMessage = "Blah, Blah, Blah"
+    var tempMessage2: String = "" {
+        willSet(newScore) {
+            myLabel.text = newScore
+            print("myLabel.text = \(String(describing: myLabel.text)) and newScore = \(newScore)")
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +36,9 @@ class ViewController: UIViewController {
         myButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         myButton.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor, constant: 30).isActive = true
         
-        ////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
         myLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(myLabel)
@@ -55,12 +64,16 @@ class ViewController: UIViewController {
             input.placeholder = "There's no value"
             input.clearButtonMode = UITextFieldViewMode.whileEditing  //very cool feature
             field = input
+            print("FIELD ===> \(field!.text!)") // <--- never fires
+            self.tempMessage2 = field!.text!    // <--- never fires
         }
-        
         
         func yesHandler(actionTarget: UIAlertAction){
             print("YES -> !!");
             print(field!.text!);
+            
+            print("FIELD INSIDE ===> \(field!.text!)")  //<--- this works
+            self.tempMessage2 = field!.text!            //<--- this works
         }
 
         myAlert.addAction(UIAlertAction(title: "SHOW ", style: .default, handler: yesHandler))
