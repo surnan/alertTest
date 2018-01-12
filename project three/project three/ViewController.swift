@@ -51,10 +51,31 @@ class ViewController: UIViewController {
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         view.addSubview(finalButton)
         finalButton.setTitle("FINAL BUTTON", for: .normal)
-        finalButton.backgroundColor = UIColor.blue
+        finalButton.backgroundColor = .green
+        finalButton.addTarget(self, action: #selector(finalButtonPressed(sender:)), for: .touchDown)
+        
+        
         finalButton.translatesAutoresizingMaskIntoConstraints = false
         finalButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         finalButton.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor, constant: -50).isActive = true
+    }
+    
+    
+    @objc func finalButtonPressed(sender: UIButton){
+        print("FINAL BUTTON PRESSED")
+        
+        let finalAlert = UIAlertController(title: "Final Title", message: "Final Message", preferredStyle: .alert)
+        
+        finalAlert.addTextField(){text in
+            print(text)
+        }
+        
+        finalAlert.addAction(UIAlertAction(title: "Add", style: .default, handler: nil))
+        finalAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        present(finalAlert, animated: true)
+        
+        
     }
     
     
@@ -94,7 +115,7 @@ class ViewController: UIViewController {
 
 
 
-//        finalButton.setTitleColor(.white, for: .normal)
+
 
 
 
