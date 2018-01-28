@@ -33,10 +33,7 @@ class ViewController: UIViewController {
         myButton.translatesAutoresizingMaskIntoConstraints = false
         myButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         myButton.topAnchor.constraint(equalTo: view.readableContentGuide.topAnchor, constant: 30).isActive = true
-        
-        
-        
-        
+  
         myLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(myLabel)
         myLabel.text = tempMessage
@@ -44,8 +41,7 @@ class ViewController: UIViewController {
         myLabel.backgroundColor = .blue
         myLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         myLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    
-    
+  
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -54,7 +50,6 @@ class ViewController: UIViewController {
         finalButton.backgroundColor = .green
         finalButton.addTarget(self, action: #selector(finalButtonPressed(sender:)), for: .touchDown)
         
-        
         finalButton.translatesAutoresizingMaskIntoConstraints = false
         finalButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         finalButton.bottomAnchor.constraint(equalTo: view.readableContentGuide.bottomAnchor, constant: -50).isActive = true
@@ -62,23 +57,32 @@ class ViewController: UIViewController {
     
     
     @objc func finalButtonPressed(sender: UIButton){
-        print("FINAL BUTTON PRESSED")
-        
-        let finalAlert = UIAlertController(title: "Final Title", message: "Final Message", preferredStyle: .alert)
-        
-        finalAlert.addTextField(){text in
-            print(text)
+        let finalAlert = UIAlertController(title: "Enter New Value", message: "From 0 to 255", preferredStyle: .alert)
+
+        finalAlert.addTextField(configurationHandler: { (textInput: UITextField) in
+            textInput.placeholder = "new value"
+            })
+
+        func addHandler(actionTarget: UIAlertAction){
+            checkIfInt(inputValue: finalAlert.textFields![0].text!)
         }
-        
-        finalAlert.addAction(UIAlertAction(title: "Add", style: .default, handler: nil))
+
+        finalAlert.addAction(UIAlertAction(title: "Add", style: .default, handler: addHandler))
         finalAlert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        
         present(finalAlert, animated: true)
-        
-        
     }
     
     
+    func checkIfInt(inputValue: String?){
+        guard let temp = Int(inputValue!), temp <= 255 && temp >= 0 else {
+            print("!!!!! ILLEGAL VALUE !!!!")
+            let warningAlertController = UIAlertController(title: "ERROR: Invalid Input", message: "Original value will be restored", preferredStyle: .alert)
+            warningAlertController.addAction(UIAlertAction(title: "OK", style: .destructive, handler: nil))
+            present(warningAlertController, animated: true, completion: nil)
+            return
+        }
+        print("legal value of ->  \(temp)")
+    }
     
     @objc func buttonPressed(sender: UIButton){
         print("Button Press Happened")
